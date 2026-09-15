@@ -1,0 +1,25 @@
+generated: '2026-09-14'
+method: searched
+source: https://aiola.ai/, https://aiola.ai/request-a-demo/, https://aiola.ai/contact/
+plan_count: 0
+plans: []
+model: contact-sales
+note: >-
+  aiOla publishes no pricing. There is no pricing page, no rate card, no free tier and no
+  self-serve tier anywhere on aiola.ai or docs.aiola.ai. The single commercial call to
+  action across the marketing site is "Request a Demo", and the documentation's route to
+  credentials (https://platform.aiola.ai/) does not resolve. A buyer — human or agent —
+  cannot determine the cost of a transcription without talking to a salesperson.
+evidence:
+- url: https://aiola.ai/pricing-features/
+  status: 200
+  detail: >-
+    Indexed by third parties as an aiOla pricing page, but it 301s to https://aiola.ai/
+    and serves the homepage byte-for-byte. It is a soft-404, not a pricing page.
+- url: https://aiola.ai/request-a-demo/
+  status: 200
+  detail: The actual commercial entry point — a lead form.
+- url: https://docs.aiola.ai/get-started/quickstart
+  status: 200
+  detail: Links to https://platform.aiola.ai/ to "get one here" (an API key); that host
+    does not resolve.

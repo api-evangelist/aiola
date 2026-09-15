@@ -1,0 +1,102 @@
+generated: '2026-09-14'
+method: searched
+source: https://registry.npmjs.org/, https://pypi.org/pypi/aiola/json, https://github.com/aiola-lab
+note: >-
+  aiOla publishes its client libraries from the aiola-lab GitHub organization. Two of
+  the five are on a public registry (PyPI, npm); the C# and Swift SDKs are distributed
+  as source from GitHub only and have no registry metadata endpoint to query, so their
+  version is read from the repository rather than a registry.
+packages:
+- language: python
+  registry: pypi
+  name: aiola
+  url: https://pypi.org/project/aiola/
+  install: pip install aiola
+  repository: https://github.com/aiola-lab/aiola-python-sdk
+  official: true
+  version: 0.4.0
+  published: '2025-12-28'
+  license: MIT
+  requires: '>=3.10'
+  note: >-
+    Official Python SDK covering auth (grant_token / session), STT file transcription,
+    STT Socket.IO streaming and TTS synthesize/stream. Optional [mic] extra adds
+    microphone capture.
+- language: javascript
+  registry: npm
+  name: '@aiola/sdk'
+  url: https://www.npmjs.com/package/@aiola/sdk
+  install: npm install @aiola/sdk
+  repository: https://github.com/aiola-lab/aiola-js-sdk
+  official: true
+  version: 2.4.0
+  published: '2026-01-06'
+  note: >-
+    Official JavaScript/TypeScript SDK, the current unified client the documentation
+    quickstarts use. Most recently published aiOla package.
+- language: javascript
+  registry: npm
+  name: '@aiola/web-sdk-stt'
+  url: https://www.npmjs.com/package/@aiola/web-sdk-stt
+  install: npm install @aiola/web-sdk-stt
+  repository: https://github.com/aiola-lab/aiola-ts-client-sdk
+  official: true
+  version: 0.1.5
+  published: '2025-07-06'
+  note: >-
+    Earlier browser-only speech-to-text client. Superseded by @aiola/sdk, which is the
+    package the current quickstarts install; kept here as a published surface, not a
+    recommendation.
+- language: javascript
+  registry: npm
+  name: '@aiola/web-sdk-tts'
+  url: https://www.npmjs.com/package/@aiola/web-sdk-tts
+  install: npm install @aiola/web-sdk-tts
+  repository: https://github.com/aiola-lab/aiola-ts-client-sdk
+  official: true
+  version: 1.0.1
+  published: '2025-05-15'
+  note: >-
+    Earlier browser-only text-to-speech client. Superseded by @aiola/sdk.
+- language: csharp
+  registry: source
+  name: aiola-csharp-sdk
+  url: https://github.com/aiola-lab/aiola-csharp-sdk
+  install: git clone https://github.com/aiola-lab/aiola-csharp-sdk
+  repository: https://github.com/aiola-lab/aiola-csharp-sdk
+  official: true
+  version: null
+  published: '2025-02-03'
+  note: >-
+    Checked 2026-09-14 — no package under this name on NuGet
+    (azuresearch-usnc.nuget.org query for "aiola" returned zero results), so there is
+    no registry version to record. `published` is the last commit pushed to the
+    repository, which is 19 months behind the Python and JavaScript SDKs.
+- language: swift
+  registry: source
+  name: aiola-swift-sdk
+  url: https://github.com/aiola-lab/aiola-swift-sdk
+  install: Swift Package Manager — add https://github.com/aiola-lab/aiola-swift-sdk
+  repository: https://github.com/aiola-lab/aiola-swift-sdk
+  official: true
+  version: null
+  published: '2025-02-19'
+  note: >-
+    Swift Package Manager consumes the git URL directly; there is no central Swift
+    registry with a metadata endpoint to query, so no version can be recorded.
+    `published` is the last commit pushed to the repository.
+excluded:
+- name: '@aiolaapp/logger'
+  registry: npm
+  reason: >-
+    Published under the unrelated @aiolaapp scope and described as an error-tracking
+    SDK for "Aiola App Logs". Not linked from aiOla's docs or the aiola-lab GitHub
+    organization, so it is not recorded as first-party.
+currency:
+  most_recent_release: '2026-01-06'
+  most_recent_package: '@aiola/sdk'
+  stale_packages:
+  - aiola-csharp-sdk
+  - aiola-swift-sdk
+  - '@aiola/web-sdk-tts'
+  - '@aiola/web-sdk-stt'

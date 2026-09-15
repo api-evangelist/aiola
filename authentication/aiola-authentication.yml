@@ -1,0 +1,99 @@
+generated: '2026-09-14'
+method: searched
+source: https://docs.aiola.ai/developer-guides/authentication
+docs: https://docs.aiola.ai/developer-guides/authentication
+corroborated_by: https://github.com/aiola-lab/aiola-python-sdk (aiola/clients/auth/client.py,
+  aiola/constants.py)
+summary: >-
+  Two-tier authentication. A long-lived API key never leaves the backend; it is exchanged
+  for a short-lived bearer token, which is exchanged for a session JWT access token bound
+  to a workflow. The access token is the credential every Speech API call carries.
+schemes:
+- id: api_key
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: Bearer <api key>
+  used_for: the token-exchange call only (POST https://auth.aiola.ai/voip-auth/apiKey2Token)
+  obtained_from: https://platform.aiola.ai/
+  obtained_from_status: >-
+    unreachable 2026-09-14 — platform.aiola.ai is a dangling CNAME with no A record on
+    any public resolver, so the documented route to a key does not resolve.
+  note: The docs are explicit that the API key must stay server-side and must never ship
+    in frontend code or version control.
+- id: access_token
+  type: http
+  scheme: bearer
+  in: header
+  header: Authorization
+  format: Bearer <JWT access token>
+  used_for: every Speech-to-Text and Text-to-Speech request, and the streaming Socket.IO
+    handshake
+  token_format: JWT (RFC 7519) — the SDK parses the payload and reads `exp`
+  lifetime: ~30 minutes (stated in the documentation FAQ)
+  refresh: >-
+    No refresh-token grant. A new access token is minted by repeating the API-key
+    exchange. The SDKs cache the token and re-mint it when `exp` is within a 5-minute
+    buffer.
+flow:
+- step: 1
+  operation: POST https://auth.aiola.ai/voip-auth/apiKey2Token
+  request_auth: Authorization Bearer <api key>
+  response_field: context.token
+  description: Exchanges the API key for a temporary bearer token.
+- step: 2
+  operation: POST https://auth.aiola.ai/voip-auth/session
+  request_auth: Authorization Bearer <temporary token>
+  request_body: '{ "workflow_id": "<uuid>" }'
+  response_fields:
+  - jwt
+  - sessionId
+  description: >-
+    Creates a session and returns the JWT access token plus a session id. A session
+    occupies a concurrency slot on the account.
+- step: 3
+  operation: DELETE https://auth.aiola.ai/voip-auth/session
+  request_auth: Authorization Bearer <access token>
+  response_fields:
+  - status
+  - deletedAt
+  description: >-
+    Closes the session and frees the concurrency slot. This is the explicit teardown an
+    agent must call; sessions are a metered resource, not a free handle.
+oauth2: false
+openid_connect: false
+mutual_tls: false
+scopes:
+  model: none
+  note: >-
+    No OAuth2 authorization server and no scope surface. A session is bound to a
+    workflow_id, which is a routing/configuration handle, not a permission scope, so no
+    scopes/ artifact is written.
+errors:
+- status: 401
+  code: UNAUTHORIZED
+  message: Invalid or expired access token
+  remediation: Verify the Authorization header, confirm the `Bearer <token>` format, and
+    mint a new access token.
+- status: 403
+  code: FORBIDDEN
+  message: API key does not have required permissions
+  remediation: Confirm the API key is active and not revoked; contact aiOla support for
+    permission adjustments.
+key_rotation: >-
+  Rotating the API key in the aiOla dashboard immediately invalidates every access token
+  minted from it.
+environments:
+  default_api_base: https://apis.aiola.ai
+  default_auth_base: https://auth.aiola.ai
+  enterprise: >-
+    Self-hosted / dedicated deployments override both bases — the docs show
+    https://your-company.api.aiola.ai + https://your-company.auth.aiola.ai and a
+    single-host https://your-company.aiola-enterprise.com form, configured through the
+    SDK's base_url / auth_base_url options or the AIOLA_ENDPOINT environment variable.
+  note: >-
+    The documentation's environment-variable example still shows
+    AIOLA_ENDPOINT=https://api.aiola.com, a host that does not resolve; the SDK constant
+    shipped in the published packages is https://apis.aiola.ai. The docs and the code
+    disagree, and the code is the one that runs.

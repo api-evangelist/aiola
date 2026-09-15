@@ -1,0 +1,42 @@
+generated: '2026-09-14'
+method: searched
+source: https://docs.aiola.ai/developer-guides/text-to-speech/quickstart, https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
+limit_count: 0
+rate_limits: []
+headers: []
+status_on_exhaustion: undocumented
+note: >-
+  aiOla publishes no numeric rate limit. The full extent of the documented guidance is
+  one bullet on the text-to-speech quickstart — "Rate Limiting: Be mindful of API rate
+  limits for production applications" — with no scope, window, ceiling, burst allowance,
+  response header, or exhaustion status code. The limits clearly exist: aiOla's own SDK
+  ships RATE_LIMIT_EXCEEDED and MAX_CONCURRENCY_REACHED as error codes it expects the
+  service to return. An honest zero is recorded rather than a guess.
+observed_constraints:
+- constraint: maximum audio file size
+  value: 50 MB
+  scope: per request, POST /api/speech-to-text/file
+  source: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
+  note: >-
+    A payload cap, not a rate limit — recorded here because it is the only published
+    numeric ceiling on the API and it is what a batch client will hit first. Larger audio
+    must be streamed or split.
+- constraint: concurrent sessions per account
+  value: undocumented
+  scope: per account
+  signal: error code MAX_CONCURRENCY_REACHED
+  release: DELETE https://auth.aiola.ai/voip-auth/session
+  note: >-
+    The binding limit on this API is almost certainly concurrency rather than
+    requests-per-second, since a streaming session holds a slot for its whole lifetime.
+    The ceiling is not published, so a caller cannot size a workload before running it.
+- constraint: access token lifetime
+  value: ~30 minutes
+  scope: per session
+  source: https://docs.aiola.ai/developer-guides/authentication
+gaps:
+- No RateLimit-* / X-RateLimit-* response headers are documented.
+- No Retry-After behaviour is documented.
+- No status code is documented for an exhausted limit.
+- The concurrency ceiling — the limit the error taxonomy implies matters most — has no
+  published value.

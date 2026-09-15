@@ -1,0 +1,148 @@
+generated: '2026-09-14'
+method: searched
+source: https://docs.aiola.ai/developer-guides/authentication, https://docs.aiola.ai/developer-guides/speech-to-text/quickstart,
+  https://docs.aiola.ai/developer-guides/speech-to-text/streaming, https://docs.aiola.ai/developer-guides/text-to-speech/streaming
+corroborated_by: https://github.com/aiola-lab/aiola-python-sdk
+note: >-
+  aiOla publishes no OpenAPI, so these conventions are read from the documentation guides
+  and from the operation surface of aiOla's own open-source SDKs. Where a convention is
+  simply not documented, that is recorded as undocumented rather than guessed.
+auth:
+  style: bearer JWT access token, minted from an API key via a separate auth host
+  header: 'Authorization: Bearer <access token>'
+  detail: authentication/aiola-authentication.yml
+transport:
+  rest:
+    base: https://apis.aiola.ai
+    style: JSON + multipart file upload
+    operations:
+    - POST /api/speech-to-text/file
+    - POST /api/tts/synthesize
+    - POST /api/tts/stream
+  streaming:
+    protocol: Socket.IO
+    path: /api/voice-streaming/socket.io
+    namespace: /events
+    direction: bidirectional — the client sends raw audio chunks and receives transcript
+      events
+    events:
+    - name: connect
+      direction: server -> client
+    - name: disconnect
+      direction: server -> client
+    - name: transcript
+      direction: server -> client
+      payload_field: transcript
+    - name: error
+      direction: server -> client
+    note: >-
+      This is a real event surface, but it is a session-scoped duplex socket, not a
+      webhook or a published AsyncAPI document. No asyncapi/ artifact is written and no
+      Webhooks pointer is emitted, because aiOla publishes neither.
+  webhooks:
+    present: false
+    note: No callback or webhook surface is documented anywhere in the developer guides.
+pagination:
+  style: none
+  note: >-
+    There is no collection endpoint on the public surface — every operation acts on one
+    audio payload or one text string — so pagination does not arise.
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  scope: []
+  evidence: >-
+    No Idempotency-Key header, request-id deduplication, or replay window appears in any
+    documentation page or in either first-party SDK. Nothing in the client sets or
+    forwards an idempotency token.
+  consequence: >-
+    Every write is a compute call — transcribe this audio, synthesize this text — so a
+    retry costs money and latency but does not corrupt stored state. An agent retrying a
+    timed-out transcription will be billed twice for one result and has no way to ask the
+    service to collapse the duplicate.
+reversibility:
+  grade: na
+  reason: no-persistent-write-surface
+  evidence: >-
+    The public API has no create/update/delete of durable resources. STT and TTS are
+    stateless transformations that return a result; the one stateful object is the
+    auth session, and it is explicitly torn down by the caller.
+  closest_analogue:
+    operation: DELETE https://auth.aiola.ai/voip-auth/session
+    effect: closes the session and frees the concurrency slot
+    window: not applicable — teardown is the intended terminal step, not an undo
+  note: >-
+    Recorded as `na` rather than `none`: there is nothing here an agent could need to
+    take back. Marking it `none` would read as a missing safety feature on a surface that
+    has no irreversible action to protect.
+dry_run_mode:
+  supported: false
+  grade: na
+  note: >-
+    Same reasoning as reversibility — a transcription has no side effect to rehearse.
+versioning:
+  api_versioning:
+    scheme: none
+    evidence: >-
+      No version segment or version header appears in any path. /api/speech-to-text/file,
+      /api/tts/synthesize and /voip-auth/session are all unversioned. A breaking change
+      to any of them has no compatibility escape hatch for callers.
+  model_versioning:
+    scheme: named model generations
+    values:
+    - Jargonic-v2
+    - Jargonic-v2-Flash
+    - Jargonic-v1
+    note: >-
+      The only versioning aiOla actually publishes is of the ASR models, described in
+      prose on https://docs.aiola.ai/speech-to-text. No documentation page states how a
+      caller pins a model generation on a request.
+  sdk_versioning: semver, published per package (see packages/aiola-packages.yml)
+request_id_tracing:
+  documented: false
+  note: >-
+    No request-id or correlation header is documented on any response. A session id is
+    returned when the session is created and is the only handle a caller can quote to
+    support.
+error_envelope:
+  shape: '{ "error": { "code", "message" } }'
+  rfc9457: false
+  detail: errors/aiola-error-codes.yml
+rate_limit_signaling:
+  headers: undocumented
+  status_on_exhaustion: undocumented
+  machine_signal: 'error code RATE_LIMIT_EXCEEDED, and separately MAX_CONCURRENCY_REACHED
+    for the session ceiling'
+  detail: rate-limits/aiola-rate-limits.yml
+payload_limits:
+  max_audio_file_size_mb: 50
+  documented_at: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
+  supported_audio_formats:
+  - wav
+  - flac
+  - aiff
+  - m4a
+  - mp4
+  - mov
+  - m4v
+  - aac
+  - mkv
+  - mp3
+  - opus
+  documented_languages:
+  - en
+  - de
+  - fr
+  - es
+  - pr
+  language_note: >-
+    The quickstart lists five language codes for the SDK, including `pr` for Portuguese
+    (not the ISO 639-1 `pt`). aiOla's marketing surface claims 120+ languages; the
+    developer documentation enumerates five. The five are what a caller can act on.
+concurrency:
+  model: session-based
+  note: >-
+    Each session holds a concurrency slot for the account. Sessions must be closed
+    explicitly; an agent that leaks sessions will hit MAX_CONCURRENCY_REACHED rather than
+    a rate limit. The account ceiling is not published.

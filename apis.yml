@@ -1,23 +1,145 @@
 aid: aiola
 name: aiOla
-description: 'aiOla is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'aiOla is a deep-tech voice, speech and conversational AI lab that sells
+  enterprise Speech AI as an API: the Jargonic family of multilingual automatic speech
+  recognition models (Jargonic-v2, Jargonic-v2-Flash, Jargonic-v1) with zero-shot jargon
+  and keyword spotting, a low-latency text-to-speech model with jargon-pronunciation
+  conditioning, and a speech-understanding layer covering summarization, sentiment,
+  entity, topic and key-phrase detection, auto chapters, content moderation and PII
+  redaction. The developer surface is delivered through first-party Python, JavaScript/TypeScript,
+  C# and Swift SDKs against a REST + Socket.IO API, with a two-tier API-key-to-JWT
+  authentication model. The company also packages the same technology as field voice
+  agents that capture data into Salesforce for enterprise field teams.'
+image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
 url: https://raw.githubusercontent.com/api-evangelist/aiola/refs/heads/main/apis.yml
-x-type: company
-x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-14'
 modified: '2026-09-14'
 tags:
-- Company
-apis: []
+- Speech Recognition
+- Speech to Text
+- Text to Speech
+- Voice AI
+- Conversational AI
+- Artificial Intelligence
+- Machine Learning
+- Audio
+- Transcription
+- Enterprise
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: aiola-speech-to-text
+  name: aiOla Speech to Text API
+  image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
+  description: 'Jargonic automatic speech recognition. Batch file transcription over
+    HTTP (POST /api/speech-to-text/file, 50 MB maximum file size) and real-time streaming
+    transcription over a Socket.IO connection at /api/voice-streaming/socket.io on
+    the /events namespace, with zero-shot keyword spotting against a caller-supplied
+    jargon dictionary. No OpenAPI description is published by the provider; the operation
+    surface recorded here is read from aiOla''s own open-source SDKs.'
+  humanURL: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
+  baseURL: https://apis.aiola.ai
+  tags:
+  - Speech Recognition
+  - Speech to Text
+  - Transcription
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
+  - type: APIReference
+    url: https://docs.aiola.ai/speech-to-text
+- aid: aiola-text-to-speech
+  name: aiOla Text to Speech API
+  image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
+  description: 'Low-latency speech synthesis with multi-language, multi-voice support
+    and jargon-pronunciation conditioning. Batch synthesis (POST /api/tts/synthesize)
+    and chunked streaming synthesis (POST /api/tts/stream). No OpenAPI description
+    is published by the provider; the operation surface recorded here is read from
+    aiOla''s own open-source SDKs.'
+  humanURL: https://docs.aiola.ai/developer-guides/text-to-speech/quickstart
+  baseURL: https://apis.aiola.ai
+  tags:
+  - Text to Speech
+  - Speech Synthesis
+  - Voice AI
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://docs.aiola.ai/developer-guides/text-to-speech/quickstart
+  - type: APIReference
+    url: https://docs.aiola.ai/text-to-speech
+- aid: aiola-auth
+  name: aiOla Authentication API
+  image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
+  description: 'Two-tier authentication service. An API key is exchanged for a short-lived
+    bearer token (POST /voip-auth/apiKey2Token), which is then exchanged for a session
+    JWT access token scoped to a workflow (POST /voip-auth/session); the session is
+    released with DELETE /voip-auth/session. Access tokens are documented as lasting
+    roughly 30 minutes.'
+  humanURL: https://docs.aiola.ai/developer-guides/authentication
+  baseURL: https://auth.aiola.ai
+  tags:
+  - Authentication
+  - Tokens
+  properties:
+  - type: Documentation
+    url: https://docs.aiola.ai/developer-guides/authentication
 common:
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://aiola.ai/
+- type: DeveloperPortal
+  url: https://docs.aiola.ai/get-started/overview
+- type: Documentation
+  url: https://docs.aiola.ai/get-started/overview
+- type: GettingStarted
+  url: https://docs.aiola.ai/get-started/quickstart
+- type: Authentication
+  url: authentication/aiola-authentication.yml
+- type: Support
+  url: https://customer.support.aiola.com/servicedesk/customer/portals
+- type: Blog
+  url: https://aiola.ai/blog/
+- type: GitHubOrganization
+  url: https://github.com/aiola-lab
+- type: TermsOfService
+  url: https://aiola.ai/terms/
+- type: PrivacyPolicy
+  url: https://aiola.ai/privacy-policy/
+- type: StatusPage
+  url: https://status.aiola.ai/
+- type: TrustCenter
+  url: https://trust.aiola.ai/
+- type: Compliance
+  url: security/aiola-trust-center.yml
+- type: Packages
+  url: packages/aiola-packages.yml
+- type: SDKs
+  url: packages/aiola-packages.yml
+- type: MCPServer
+  url: mcp/aiola-mcp.yml
+- type: LLMsTxt
+  url: llms/aiola-llms.txt
+- type: Lifecycle
+  url: lifecycle/aiola-lifecycle.yml
+- type: Conventions
+  url: conventions/aiola-conventions.yml
+- type: ErrorCatalog
+  url: errors/aiola-error-codes.yml
+- type: Conformance
+  url: conformance/aiola-conformance.yml
+- type: RateLimits
+  url: rate-limits/aiola-rate-limits.yml
+- type: Plans
+  url: plans/aiola-plans-pricing.yml
+- type: DomainSecurity
+  url: security/aiola-domain-security.yml
+x-enrichment:
+  date: '2026-09-14'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3

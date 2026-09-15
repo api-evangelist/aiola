@@ -1,0 +1,200 @@
+{
+  "companyId": "6537d4843226c50012b677c9",
+  "title": "aiOla",
+  "description": "Welcome to our Trust Center — a centralized hub for showcasing our commitment to security, privacy, and compliance. Here, you’ll find transparent and up-to-date information about our security practices, compliance certifications, and data protection policies.",
+  "frameworks": [
+    {
+      "frameworkInternalName": "ccpa",
+      "status": "in-progress",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/frameworks/ccpa.svg",
+      "displayName": "CCPA 2024"
+    },
+    {
+      "frameworkInternalName": "gdpr-2024",
+      "status": "in-progress",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/frameworks/gdpr-2024.svg",
+      "displayName": "GDPR"
+    },
+    {
+      "frameworkInternalName": "soc2-type2",
+      "status": "fully-implemented",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/frameworks/soc2-type2.svg",
+      "displayName": "SOC 2 Type II"
+    },
+    {
+      "frameworkInternalName": "iso27001-2022",
+      "status": "fully-implemented",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/frameworks/iso27001-2022.svg",
+      "displayName": "ISO 27001:2022"
+    }
+  ],
+  "reportFiles": [
+    {
+      "companyId": "6537d4843226c50012b677c9",
+      "fileName": "aiOla - ISO27001:2022 Certification (One Pager)",
+      "extension": "pdf",
+      "mimeType": "application/pdf",
+      "restricted": false,
+      "uploadDate": "2025-11-03T09:17:08.814Z",
+      "auditor": "652644e151c4810012a2f0cb",
+      "hidden": false,
+      "filePath": "trustcenter/442c9612-986a-413d-a6a8-3a8992d01e28_9c99ce91e820e6eb7169118f3c2c1cdc",
+      "status": "uploaded",
+      "createdAt": "2025-11-03T09:17:08.815Z",
+      "updatedAt": "2025-11-11T18:09:03.745Z",
+      "id": "69087314d28b20b366549ce7"
+    },
+    {
+      "companyId": "6537d4843226c50012b677c9",
+      "fileName": "aiOla - ISO27001:2022 Certification Report",
+      "extension": "pdf",
+      "mimeType": "application/pdf",
+      "restricted": true,
+      "uploadDate": "2025-11-03T09:18:01.283Z",
+      "auditor": "652644e151c4810012a2f0cb",
+      "hidden": false,
+      "filePath": "trustcenter/e06ca1d7-6b9e-4cf4-b8cc-bb6bf90c2074_6ca3dcfbe8aad499dcc6a4ff0491bd40",
+      "status": "uploaded",
+      "createdAt": "2025-11-03T09:18:01.284Z",
+      "updatedAt": "2025-11-03T09:18:02.052Z",
+      "id": "69087349d61dda4f8c4954d6"
+    },
+    {
+      "companyId": "6537d4843226c50012b677c9",
+      "fileName": "aiOla SOC2 Report 2026",
+      "extension": "pdf",
+      "mimeType": "application/pdf",
+      "restricted": true,
+      "uploadDate": "2026-07-14T15:15:00.709Z",
+      "auditor": "652644e151c4810012a2f0cb",
+      "hidden": false,
+      "filePath": "trustcenter/a2f15544-e0fc-4fd7-8d1f-fe68676f441a_0e5667e912a90c80422bb70163237b78",
+      "status": "uploaded",
+      "createdAt": "2026-07-14T15:15:00.711Z",
+      "updatedAt": "2026-07-14T15:15:01.898Z",
+      "id": "6a5652740568897cf3583e5d"
+    }
+  ],
+  "vendors": [
+    {
+      "id": "6a4a11fd701ba48bb040e702",
+      "entity": "common-vendor",
+      "locations": [
+        "US"
+      ],
+      "name": "Apollo.io",
+      "description": "Sales intelligence and engagement platform for prospecting and outreach.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/apollo-io.svg"
+    },
+    {
+      "id": "6640852485b9ad0035294c40",
+      "entity": "common-vendor",
+      "locations": [
+        "US",
+        "EU"
+      ],
+      "name": "AWS",
+      "description": "Cloud service provider",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/aws.svg"
+    },
+    {
+      "id": "65fae7d35be7620013782f3a",
+      "entity": "common-vendor",
+      "locations": [],
+      "name": "Cloudflare",
+      "description": "Web infrastructure platform providing CDN, DNS, security, and edge computing services.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/cloudflare.svg"
+    },
+    {
+      "id": "65fad1346899b30012a24b17",
+      "entity": "common-vendor",
+      "locations": [
+        "US"
+      ],
+      "name": "HubSpot",
+      "description": "Customer relationship management and marketing platform for growing businesses.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/hubspot.svg"
+    },
+    {
+      "id": "6a4a11fd701ba48bb040e71f",
+      "entity": "common-vendor",
+      "locations": [
+        "US"
+      ],
+      "name": "Lemlist",
+      "description": "Cold email outreach platform with personalization and deliverability tools.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/lemlist.svg"
+    },
+    {
+      "id": "6a4a11fd701ba48bb040e7fe",
+      "entity": "common-vendor",
+      "locations": [
+        "US",
+        "EU"
+      ],
+      "name": "LiveKit",
+      "description": "Open-source platform for building real-time audio and video applications.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/live-kit.svg"
+    },
+    {
+      "id": "6a902437369418078cddaa86",
+      "description": "Unified LLM model interface",
+      "entity": "custom-vendor",
+      "locations": [
+        "EU",
+        "US"
+      ],
+      "logoUrl": "https://files.prod-us.scytale.ai/trust_center/6537d4843226c50012b677c9_1787831323723.png",
+      "name": "OpenRouter",
+      "_id": "6a902437369418078cddaa87"
+    },
+    {
+      "id": "6640852485b9ad0035294d17",
+      "entity": "common-vendor",
+      "locations": [
+        "US"
+      ],
+      "name": "Salesforce",
+      "description": "Customer relationship management platform for sales, service, and marketing.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/salesforce.svg"
+    },
+    {
+      "id": "6640852485b9ad0035294d28",
+      "entity": "common-vendor",
+      "locations": [
+        "US",
+        "EU"
+      ],
+      "name": "Snowflake",
+      "description": "Database Management System (DBMS)",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/snowflake.svg"
+    },
+    {
+      "id": "6640852485b9ad0035294d3f",
+      "entity": "common-vendor",
+      "locations": [
+        "US"
+      ],
+      "name": "Twilio",
+      "description": "Cloud communications platform providing APIs for messaging, voice, and video.",
+      "logoUrl": "https://files.prod-us.scytale.ai/logos/vendors/twilio.svg"
+    }
+  ],
+  "customVendors": [
+    {
+      "id": "6a902437369418078cddaa86",
+      "description": "Unified LLM model interface",
+      "entity": "custom-vendor",
+      "locations": [
+        "EU",
+        "US"
+      ],
+      "logoUrl": "https://files.prod-us.scytale.ai/trust_center/6537d4843226c50012b677c9_1787831323723.png",
+      "name": "OpenRouter",
+      "_id": "6a902437369418078cddaa87"
+    }
+  ],
+  "faqs": [],
+  "createdAt": "2025-06-19T14:32:47.104Z",
+  "updatedAt": "2026-08-27T11:50:49.067Z"
+}

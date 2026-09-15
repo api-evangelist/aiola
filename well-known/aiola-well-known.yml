@@ -1,0 +1,128 @@
+generated: '2026-09-14'
+method: probed
+source: live GET probes of the named /.well-known/ path list on every host in apis.yml
+note: >-
+  Six hosts probed: the registrable domain and www, the Fern-hosted documentation site,
+  both API hosts named by the first-party SDK constants, and the console host the
+  documentation tells developers to visit for an API key. Only one path returned a 200,
+  and its body is an EMPTY RFC 9727 linkset ({"linkset":[]}) emitted by the docs
+  platform, which advertises no APIs — so no WellKnown pointer is wired in apis.yml.
+  The three aiola.ai service hosts could not be reached at all (see unreachable notes),
+  which is itself the finding rather than a 404.
+hosts:
+- host: aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+    note: 301 into the WordPress site chrome, not an authorization-server metadata document.
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: www.aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 301
+  - path: /.well-known/oauth-authorization-server
+    status: 301
+  - path: /.well-known/api-catalog
+    status: 301
+  - path: /.well-known/ai-plugin.json
+    status: 301
+  - path: /.well-known/agent-card.json
+    status: 301
+  - path: /.well-known/agent.json
+    status: 301
+  note: >-
+    www.aiola.ai 301s every /.well-known/ path into the apex marketing site; none is a
+    document.
+- host: docs.aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 200
+    file: aiola-api-catalog.json
+    content_type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"
+    note: >-
+      Real RFC 9727 media type, but the linkset array is EMPTY — it catalogs zero APIs.
+      Emitted by the Fern documentation platform, not authored by aiOla. Recorded as a
+      served document, NOT counted as an API catalog.
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: apis.aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+  unreachable: true
+  note: >-
+    The production API host named by aiOla's own SDK constants (DEFAULT_BASE_URL).
+    DNS resolves through vp1-uw2-api.aiola.ai to an AWS ELB in us-west-2
+    (52.27.178.215, 35.83.9.112) but TCP 443 never completes a connection from a public
+    client — every probe timed out at connect. Recorded as status 0 (no response), not
+    as a 404.
+- host: auth.aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/openid-configuration
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0
+  unreachable: true
+  note: >-
+    The token-exchange host (DEFAULT_AUTH_BASE_URL in the SDKs). TCP connects and the
+    TLS ClientHello/ServerHello are exchanged, but no HTTP response is ever returned to
+    an anonymous client. Recorded as status 0.
+- host: platform.aiola.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0
+  - path: /.well-known/agent.json
+    status: 0
+  unreachable: true
+  note: >-
+    The console the quickstarts link to for obtaining an API key. It is a DANGLING
+    CNAME: platform.aiola.ai -> mp1-uw2.aiola.ai -> d5iykhn6i33xz.cloudfront.net, and
+    that CloudFront distribution has no A record on 8.8.8.8 or 1.1.1.1. The host does
+    not resolve to an address at all.
+agent_card:
+  found: false
+  note: >-
+    /.well-known/agent-card.json and the legacy /.well-known/agent.json were probed on
+    all six hosts. No 200 anywhere, and nothing that parses as an AgentCard. No a2a/
+    artifact is written and no AgentCard pointer is emitted.

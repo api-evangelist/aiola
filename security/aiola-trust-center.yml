@@ -1,0 +1,63 @@
+generated: '2026-09-14'
+method: probed
+source: >-
+  https://trust.aiola.ai/ — page data read from
+  https://api.scytale.ai/views/trust-center/public/page-data with the Origin and
+  Referer of trust.aiola.ai
+url: https://trust.aiola.ai/
+platform: Scytale
+company_id: 6537d4843226c50012b677c9
+raw: security/aiola-trust-center-page-data.json
+note: >-
+  trust.aiola.ai serves a single-page-app shell with no crawlable text; the certification
+  state below is read from the public page-data document the app itself loads, so it is
+  what a visitor to the Trust Center sees rather than a marketing claim.
+certifications:
+- name: SOC 2 Type II
+  framework: soc2-type2
+  status: fully-implemented
+  report_available: true
+  report_name: aiOla SOC2 Report 2026
+  access: request via the Trust Center
+- name: ISO 27001:2022
+  framework: iso27001-2022
+  status: fully-implemented
+  report_available: true
+  reports:
+  - 'aiOla - ISO27001:2022 Certification (One Pager)'
+  - 'aiOla - ISO27001:2022 Certification Report'
+  access: request via the Trust Center
+in_progress:
+- name: GDPR
+  framework: gdpr-2024
+  status: in-progress
+- name: CCPA 2024
+  framework: ccpa
+  status: in-progress
+subprocessors:
+- Apollo.io
+- AWS
+- Cloudflare
+- HubSpot
+- Lemlist
+- LiveKit
+- OpenRouter
+- Salesforce
+- Snowflake
+- Twilio
+subprocessor_note: >-
+  Published in the Trust Center's vendor list. LiveKit and OpenRouter are the two worth
+  a buyer's attention — they place real-time media transport and third-party model
+  routing inside the data path of a speech product.
+documents_gated: true
+documents_gated_note: >-
+  All three audit artifacts are behind a Trust Center access request. Framework status
+  and the subprocessor list are public; the reports are not.
+badges_on_marketing_site:
+- SOC 2
+- ISO 27001
+- GDPR
+- CCPA
+badge_note: >-
+  aiola.ai displays all four badges in its footer trust strip, including GDPR and CCPA,
+  which the company's own Trust Center records as in-progress rather than implemented.

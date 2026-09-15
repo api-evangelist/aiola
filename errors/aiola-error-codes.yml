@@ -1,0 +1,93 @@
+generated: '2026-09-14'
+method: searched
+source: https://docs.aiola.ai/developer-guides/authentication
+corroborated_by: https://github.com/aiola-lab/aiola-python-sdk (aiola/errors.py — the
+  AiolaError docstring enumerates the service error codes the SDK is built to handle)
+format: custom-json
+rfc9457: false
+envelope:
+  shape: '{ "error": { "code": "<MACHINE_CODE>", "message": "<human text>" } }'
+  documented_at: https://docs.aiola.ai/developer-guides/authentication
+  sdk_parsing: >-
+    The SDK's AiolaError.from_response also reads a flat { "message", "code", "details" }
+    body, so the wire envelope is not consistently one shape. Neither form is
+    application/problem+json.
+  fields:
+  - name: code
+    description: Machine-readable error code for programmatic handling.
+  - name: message
+    description: Human-readable description.
+  - name: details
+    description: Additional diagnostic information (flat form only).
+service_errors:
+- code: UNAUTHORIZED
+  status: 401
+  title: Invalid API key or insufficient permissions
+  remediation: Check the Authorization header and the `Bearer <token>` format; mint a new
+    access token.
+- code: FORBIDDEN
+  status: 403
+  title: API key does not have required permissions
+  remediation: Confirm the key is active and not revoked; contact support for permission
+    adjustments.
+- code: TOKEN_EXPIRED
+  title: Access token has expired and needs to be refreshed
+  remediation: Re-run the API-key exchange to mint a new access token. Tokens last about
+    30 minutes.
+- code: INVALID_TOKEN
+  title: Access token is malformed or invalid
+  remediation: Confirm the token is the `jwt` field from the session response and has not
+    been truncated.
+- code: MAX_CONCURRENCY_REACHED
+  title: Too many concurrent sessions for your account
+  remediation: >-
+    Close finished sessions with DELETE /voip-auth/session to free a slot. This is the
+    account-level concurrency ceiling, and it is the limit an agent is most likely to
+    hit; aiOla does not publish the numeric value.
+- code: RATE_LIMIT_EXCEEDED
+  title: Too many requests in a short period
+  remediation: Back off and retry. No published limit, window, or response header
+    documents the ceiling (see rate-limits/aiola-rate-limits.yml).
+- code: INVALID_AUDIO_FORMAT
+  title: The audio format is not supported
+  remediation: >-
+    Use one of the documented containers — wav, flac, aiff, m4a, mp4, mov, m4v, aac, mkv,
+    mp3, opus — and keep files under 50 MB.
+- code: WORKFLOW_NOT_FOUND
+  title: The specified workflow ID does not exist
+  remediation: Pass a workflow_id that belongs to the account when creating the session.
+- code: VALIDATION_ERROR
+  title: Request parameters are invalid
+  remediation: Check parameter names and types against the SDK signature.
+client_errors:
+  note: >-
+    Raised by the SDK itself before or around a request, not returned by the service.
+    Recorded because an agent handling AiolaError sees them on the same exception type.
+  codes:
+  - code: MISSING_API_KEY
+    title: API key is required to generate access token
+  - code: MISSING_ACCESS_TOKEN
+    title: Access token is required to close session
+  - code: MISSING_CREDENTIALS
+    title: Neither api_key nor access_token was supplied
+  - code: INVALID_TOKEN_RESPONSE
+    title: Token response carried no context.token
+  - code: INVALID_SESSION_RESPONSE
+    title: Session response carried no jwt
+  - code: TOKEN_GENERATION_ERROR
+    title: The apiKey2Token call failed
+  - code: SESSION_CREATION_ERROR
+    title: The session creation call failed
+  - code: SESSION_CLOSE_ERROR
+    title: The session close call failed
+  - code: JWT_PARSE_ERROR
+    title: The access token payload could not be decoded
+gaps:
+- >-
+  No error reference page exists in the documentation. The codes above are assembled from
+  the authentication guide's two worked examples and the first-party SDK's own error
+  taxonomy; there is no published page a developer can be pointed at.
+- >-
+  No HTTP status is documented for MAX_CONCURRENCY_REACHED, RATE_LIMIT_EXCEEDED,
+  INVALID_AUDIO_FORMAT, WORKFLOW_NOT_FOUND or VALIDATION_ERROR, so a client cannot branch
+  on status alone.

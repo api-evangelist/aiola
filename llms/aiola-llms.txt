@@ -1,0 +1,31 @@
+# aiOla
+
+> Build with aiOla's AI speech technology. Speech-to-text, text-to-speech, and speech understanding APIs. Complete documentation for developers.
+
+## Instructions for AI Agents
+
+- For clean Markdown of any page, append `.md` to the page URL
+- For section-specific indexes, append `/llms.txt` to any section URL
+- For AI client integration (Claude Code, Cursor, etc.), connect to the MCP server at https://docs.aiola.ai/_mcp/server
+
+## Docs
+
+- [Overview](https://docs.aiola.ai/get-started/overview.md)
+- [Quickstart](https://docs.aiola.ai/get-started/quickstart.md)
+- [Quickstart](https://docs.aiola.ai/developer-guides/speech-to-text/quickstart.md)
+- [Streaming](https://docs.aiola.ai/developer-guides/speech-to-text/streaming.md)
+- [Quickstart](https://docs.aiola.ai/developer-guides/text-to-speech/quickstart.md)
+- [Streaming](https://docs.aiola.ai/developer-guides/text-to-speech/streaming.md)
+- [Authentication](https://docs.aiola.ai/developer-guides/authentication.md): Learn how aiOla's authentication system works, its security benefits, and best practices for implementation.
+- [Keyword Spotting](https://docs.aiola.ai/keyword-spotting.md): Learn how to use aiOla's keyword spotting technology to detect and transcribe industry-specific jargon with high accuracy
+- [Speech to Text](https://docs.aiola.ai/speech-to-text.md): Here you'll find information to get started with the Speech to Text API
+- [Text to Speech](https://docs.aiola.ai/text-to-speech.md): Here you'll find information to get started with the Text to Speech API
+- [Summarization](https://docs.aiola.ai/summarization.md): Learn about aiOla's audio summarization capabilities.
+- [Content Moderation](https://docs.aiola.ai/content-moderation.md): Learn about aiOla's content moderation capabilities.
+- [Sentiment Analysis](https://docs.aiola.ai/sentiment-analysis.md): Learn about aiOla's sentiment analysis capabilities.
+- [Entity Detection](https://docs.aiola.ai/entity-detection.md): Learn about aiOla's entity detection capabilities.
+- [Entity Detection from List](https://docs.aiola.ai/entity-detection-from-list.md): Learn about aiOla's entity detection capabilities.
+- [Topic Detection](https://docs.aiola.ai/topic-detection.md): Learn about aiOla's topic detection capabilities.
+- [Auto Chapters](https://docs.aiola.ai/auto-chapters.md): Learn about aiOla's auto chapters capabilities.
+- [Key Phrases](https://docs.aiola.ai/key-phrases.md): Learn about aiOla's key phrases extraction capabilities.
+- [PII Redaction](https://docs.aiola.ai/pii-redaction.md): Learn about aiOla's PII redaction capabilities.

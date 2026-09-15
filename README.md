@@ -64,5 +64,50 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-aiOla is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+aiOla is a deep-tech voice, speech and conversational AI lab that sells enterprise Speech AI
+as an API. Its Jargonic family of multilingual automatic speech recognition models
+(Jargonic-v2, Jargonic-v2-Flash and the earlier Jargonic-v1) is built around zero-shot
+jargon and keyword spotting, so a caller can supply a dictionary of domain terms — drug
+names, case-law phrases, part numbers — and have them transcribed accurately without
+retraining. Alongside it aiOla ships a low-latency text-to-speech model that can be
+conditioned on a recording of how a word should be pronounced, and a speech-understanding
+layer covering summarization, sentiment, entity and topic detection, key phrases, auto
+chapters, content moderation and PII redaction. The same technology is packaged
+commercially as field voice agents that capture data into Salesforce.
+
+## What this profile found
+
+- **No published machine-readable contract.** There is no OpenAPI, Swagger, GraphQL or
+  AsyncAPI document. `/openapi.json`, `/openapi.yaml`, `/swagger.json`, `/api-docs` and
+  `/api-reference` were probed on both web hosts, and the documentation sitemap lists
+  nineteen pages with no API reference section among them.
+- **The operation surface is real and readable anyway** — it is published as source, in
+  aiOla's own MIT-licensed SDKs: `POST /api/speech-to-text/file`, `POST /api/tts/synthesize`,
+  `POST /api/tts/stream`, a Socket.IO stream at `/api/voice-streaming/socket.io`, and a
+  three-call auth exchange on a separate host. Every artifact here that describes an
+  operation cites the SDK file it was read from; none is a generated spec.
+- **A live, unauthenticated MCP server** at `https://docs.aiola.ai/_mcp/server`, advertised
+  on every docs page. It answers `tools/list` with one tool — documentation search. It is
+  not a product API server.
+- **SOC 2 Type II and ISO 27001:2022**, both recorded as fully implemented in aiOla's own
+  Scytale Trust Center; GDPR and CCPA are recorded there as in progress, though the
+  marketing footer shows badges for all four.
+- **Four of aiOla's own advertised hosts did not answer** an anonymous public client on
+  2026-09-14. `platform.aiola.ai` — the console the quickstart tells developers to visit
+  for an API key — is a dangling CNAME to a CloudFront distribution with no A record.
+
+## Artifacts
+
+| Path | What it holds |
+|---|---|
+| `authentication/` | The API-key-to-JWT exchange, session lifecycle, and the docs/SDK disagreement over the default host |
+| `conformance/` | Eighteen standards assertions, each with the evidence that establishes it |
+| `conventions/` | Transport, streaming events, payload limits, idempotency (none) and reversibility (n/a) |
+| `errors/` | The error-code catalog assembled from the auth guide and the SDK error taxonomy |
+| `lifecycle/` | Status page components, model generations, and the host-liveness findings |
+| `llms/` | aiOla's own `llms.txt`, saved verbatim |
+| `mcp/` | The probed MCP server manifest and its verbatim `tools/list` response |
+| `packages/` | Six first-party SDKs with registry versions and publish dates |
+| `plans/`, `rate-limits/` | Honest zeros — aiOla publishes neither pricing nor limits |
+| `security/` | Domain security probe, Trust Center certifications, and the absent disclosure program |
+| `well-known/` | The `/.well-known/` probe across all six hosts |

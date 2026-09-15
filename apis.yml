@@ -1,21 +1,31 @@
 aid: aiola
 name: aiOla
-description: 'aiOla is a deep-tech voice, speech and conversational AI lab that sells
-  enterprise Speech AI as an API: the Jargonic family of multilingual automatic speech
-  recognition models (Jargonic-v2, Jargonic-v2-Flash, Jargonic-v1) with zero-shot jargon
-  and keyword spotting, a low-latency text-to-speech model with jargon-pronunciation
-  conditioning, and a speech-understanding layer covering summarization, sentiment,
-  entity, topic and key-phrase detection, auto chapters, content moderation and PII
-  redaction. The developer surface is delivered through first-party Python, JavaScript/TypeScript,
-  C# and Swift SDKs against a REST + Socket.IO API, with a two-tier API-key-to-JWT
-  authentication model. The company also packages the same technology as field voice
-  agents that capture data into Salesforce for enterprise field teams.'
+description: 'aiOla is a deep-tech voice, speech and conversational AI lab that sells enterprise Speech
+  AI as an API: the Jargonic family of multilingual automatic speech recognition models (Jargonic-v2,
+  Jargonic-v2-Flash, Jargonic-v1) with zero-shot jargon and keyword spotting, a low-latency text-to-speech
+  model with jargon-pronunciation conditioning, and a speech-understanding layer covering summarization,
+  sentiment, entity, topic and key-phrase detection, auto chapters, content moderation and PII redaction.
+  The developer surface is delivered through first-party Python, JavaScript/TypeScript, C# and Swift SDKs
+  against a REST + Socket.IO API, with a two-tier API-key-to-JWT authentication model. The company also
+  packages the same technology as field voice agents that capture data into Salesforce for enterprise
+  field teams.'
 image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
 url: https://raw.githubusercontent.com/api-evangelist/aiola/refs/heads/main/apis.yml
 specificationVersion: '0.20'
 created: '2026-09-14'
 modified: '2026-09-14'
 tags:
+- Speech Recognition
+- Speech-to-Text
+- Text-to-Speech
+- Voice AI
+- Conversational AI
+- Artificial Intelligence
+- Machine-Learning
+- Audio
+- Transcription
+- Enterprise
+tags_raw:
 - Speech Recognition
 - Speech to Text
 - Text to Speech
@@ -32,18 +42,22 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 apis:
-- aid: aiola-speech-to-text
+- aid: aiola:aiola-speech-to-text
   name: aiOla Speech to Text API
   image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
-  description: 'Jargonic automatic speech recognition. Batch file transcription over
-    HTTP (POST /api/speech-to-text/file, 50 MB maximum file size) and real-time streaming
-    transcription over a Socket.IO connection at /api/voice-streaming/socket.io on
-    the /events namespace, with zero-shot keyword spotting against a caller-supplied
-    jargon dictionary. No OpenAPI description is published by the provider; the operation
-    surface recorded here is read from aiOla''s own open-source SDKs.'
+  description: Jargonic automatic speech recognition. Batch file transcription over HTTP (POST /api/speech-to-text/file,
+    50 MB maximum file size) and real-time streaming transcription over a Socket.IO connection at /api/voice-streaming/socket.io
+    on the /events namespace, with zero-shot keyword spotting against a caller-supplied jargon dictionary.
+    No OpenAPI description is published by the provider; the operation surface recorded here is read from
+    aiOla's own open-source SDKs.
   humanURL: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
   baseURL: https://apis.aiola.ai
   tags:
+  - Speech Recognition
+  - Speech-to-Text
+  - Transcription
+  - Streaming
+  tags_raw:
   - Speech Recognition
   - Speech to Text
   - Transcription
@@ -53,17 +67,21 @@ apis:
     url: https://docs.aiola.ai/developer-guides/speech-to-text/quickstart
   - type: APIReference
     url: https://docs.aiola.ai/speech-to-text
-- aid: aiola-text-to-speech
+- aid: aiola:aiola-text-to-speech
   name: aiOla Text to Speech API
   image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
-  description: 'Low-latency speech synthesis with multi-language, multi-voice support
-    and jargon-pronunciation conditioning. Batch synthesis (POST /api/tts/synthesize)
-    and chunked streaming synthesis (POST /api/tts/stream). No OpenAPI description
-    is published by the provider; the operation surface recorded here is read from
-    aiOla''s own open-source SDKs.'
+  description: Low-latency speech synthesis with multi-language, multi-voice support and jargon-pronunciation
+    conditioning. Batch synthesis (POST /api/tts/synthesize) and chunked streaming synthesis (POST /api/tts/stream).
+    No OpenAPI description is published by the provider; the operation surface recorded here is read from
+    aiOla's own open-source SDKs.
   humanURL: https://docs.aiola.ai/developer-guides/text-to-speech/quickstart
   baseURL: https://apis.aiola.ai
   tags:
+  - Text-to-Speech
+  - Speech Synthesis
+  - Voice AI
+  - Streaming
+  tags_raw:
   - Text to Speech
   - Speech Synthesis
   - Voice AI
@@ -73,14 +91,13 @@ apis:
     url: https://docs.aiola.ai/developer-guides/text-to-speech/quickstart
   - type: APIReference
     url: https://docs.aiola.ai/text-to-speech
-- aid: aiola-auth
+- aid: aiola:aiola-auth
   name: aiOla Authentication API
   image: https://aiola.ai/wp-content/uploads/2026/03/favicon-300x300.png
-  description: 'Two-tier authentication service. An API key is exchanged for a short-lived
-    bearer token (POST /voip-auth/apiKey2Token), which is then exchanged for a session
-    JWT access token scoped to a workflow (POST /voip-auth/session); the session is
-    released with DELETE /voip-auth/session. Access tokens are documented as lasting
-    roughly 30 minutes.'
+  description: Two-tier authentication service. An API key is exchanged for a short-lived bearer token
+    (POST /voip-auth/apiKey2Token), which is then exchanged for a session JWT access token scoped to a
+    workflow (POST /voip-auth/session); the session is released with DELETE /voip-auth/session. Access
+    tokens are documented as lasting roughly 30 minutes.
   humanURL: https://docs.aiola.ai/developer-guides/authentication
   baseURL: https://auth.aiola.ai
   tags:

@@ -14,6 +14,10 @@ url: https://raw.githubusercontent.com/api-evangelist/aiola/refs/heads/main/apis
 specificationVersion: '0.20'
 created: '2026-09-14'
 modified: '2026-09-14'
+x-docs-platform: fern
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-17
+x-docs-hosting: vercel
 tags:
 - Speech Recognition
 - Speech-to-Text

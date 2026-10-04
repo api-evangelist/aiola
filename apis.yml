@@ -25,7 +25,7 @@ tags:
 - Voice AI
 - Conversational AI
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - Audio
 - Transcription
 - Enterprise
@@ -40,6 +40,7 @@ tags_raw:
 - Audio
 - Transcription
 - Enterprise
+- Machine-Learning
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

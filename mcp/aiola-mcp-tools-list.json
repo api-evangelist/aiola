@@ -1,4 +1,12 @@
 {
+  "endpoint": "https://docs.aiola.ai/_mcp/server",
+  "captured": "2026-10-20",
+  "method": "initialize + tools/list (anonymous, no tool called; roadmap#992)",
+  "protocol_version": "2025-06-18",
+  "server_info": {
+    "name": "fern-docs-mcp-server",
+    "version": "1.0.0"
+  },
   "result": {
     "tools": [
       {
@@ -33,7 +41,5 @@
         }
       }
     ]
-  },
-  "jsonrpc": "2.0",
-  "id": 2
+  }
 }

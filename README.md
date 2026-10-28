@@ -64,50 +64,117 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-aiOla is a deep-tech voice, speech and conversational AI lab that sells enterprise Speech AI
-as an API. Its Jargonic family of multilingual automatic speech recognition models
-(Jargonic-v2, Jargonic-v2-Flash and the earlier Jargonic-v1) is built around zero-shot
-jargon and keyword spotting, so a caller can supply a dictionary of domain terms — drug
-names, case-law phrases, part numbers — and have them transcribed accurately without
-retraining. Alongside it aiOla ships a low-latency text-to-speech model that can be
-conditioned on a recording of how a word should be pronounced, and a speech-understanding
-layer covering summarization, sentiment, entity and topic detection, key phrases, auto
-chapters, content moderation and PII redaction. The same technology is packaged
-commercially as field voice agents that capture data into Salesforce.
+aiOla is a deep-tech voice, speech and conversational AI lab that sells enterprise Speech AI as an API: the Jargonic family of multilingual automatic speech recognition models (Jargonic-v2, Jargonic-v2-Flash, Jargonic-v1) with zero-shot jargon and keyword spotting, a low-latency text-to-speech model with jargon-pronunciation conditioning, and a speech-understanding layer covering summarization, sentiment, entity, topic and key-phrase detection, auto chapters, content moderation and PII redaction. The developer surface is delivered through first-party Python, JavaScript/TypeScript, C# and Swift SDKs against a REST + Socket.IO API, with a two-tier API-key-to-JWT authentication model. The company also packages the same technology as field voice agents that capture data into Salesforce for enterprise field teams.
 
-## What this profile found
+**Areas:** Speech Recognition · Speech-to-Text · Text-to-Speech · Voice AI · Conversational AI · Artificial Intelligence · Machine Learning · Audio · Transcription · Enterprise
 
-- **No published machine-readable contract.** There is no OpenAPI, Swagger, GraphQL or
-  AsyncAPI document. `/openapi.json`, `/openapi.yaml`, `/swagger.json`, `/api-docs` and
-  `/api-reference` were probed on both web hosts, and the documentation sitemap lists
-  nineteen pages with no API reference section among them.
-- **The operation surface is real and readable anyway** — it is published as source, in
-  aiOla's own MIT-licensed SDKs: `POST /api/speech-to-text/file`, `POST /api/tts/synthesize`,
-  `POST /api/tts/stream`, a Socket.IO stream at `/api/voice-streaming/socket.io`, and a
-  three-call auth exchange on a separate host. Every artifact here that describes an
-  operation cites the SDK file it was read from; none is a generated spec.
-- **A live, unauthenticated MCP server** at `https://docs.aiola.ai/_mcp/server`, advertised
-  on every docs page. It answers `tools/list` with one tool — documentation search. It is
-  not a product API server.
-- **SOC 2 Type II and ISO 27001:2022**, both recorded as fully implemented in aiOla's own
-  Scytale Trust Center; GDPR and CCPA are recorded there as in progress, though the
-  marketing footer shows badges for all four.
-- **Four of aiOla's own advertised hosts did not answer** an anonymous public client on
-  2026-09-14. `platform.aiola.ai` — the console the quickstart tells developers to visit
-  for an API key — is a dangling CNAME to a CloudFront distribution with no A record.
+## aiOla on APIs.io
 
-## Artifacts
+Everything profiled for aiOla is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aiola/](https://apis.io/providers/aiola/)** — or go straight to one of the APIs or properties below.
 
-| Path | What it holds |
+### APIs (3)
+
+- [aiOla Speech to Text API](https://apis.io/apis/aiola/aiola-speech-to-text/) — Jargonic automatic speech recognition. Batch file transcription over HTTP (POST /api/speech-to-text/file, 50 MB maximum file size) and real-time streaming…
+- [aiOla Text to Speech API](https://apis.io/apis/aiola/aiola-text-to-speech/) — Low-latency speech synthesis with multi-language, multi-voice support and jargon-pronunciation conditioning. Batch synthesis (POST /api/tts/synthesize) and…
+- [aiOla Authentication API](https://apis.io/apis/aiola/aiola-auth/) — Two-tier authentication service. An API key is exchanged for a short-lived bearer token (POST /voip-auth/apiKey2Token), which is then exchanged for a…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [aiOla Documentation MCP Server](https://apis.io/servers/aiola/aiola-documentation-mcp-server/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Aiola Authentication](https://apis.io/security/aiola/aiola-authentication/)
+- [Aiola Domain Security](https://apis.io/security/aiola/aiola-domain-security/)
+- [Aiola Trust Center](https://apis.io/security/aiola/aiola-trust-center/)
+- [Aiola Vulnerability Disclosure](https://apis.io/security/aiola/aiola-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Aiola Plans Pricing](https://apis.io/plans/aiola/aiola-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Aiola Rate Limits](https://apis.io/rate-limits/aiola/aiola-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://aiola.ai/)
+- [Documentation](https://docs.aiola.ai/get-started/overview)
+- [Getting started](https://docs.aiola.ai/get-started/quickstart)
+- [Support](https://customer.support.aiola.com/servicedesk/customer/portals)
+- [Blog](https://aiola.ai/blog/)
+- [Trust centre](https://trust.aiola.ai/)
+- [Terms of service](https://aiola.ai/terms/)
+- [Privacy policy](https://aiola.ai/privacy-policy/)
+- [GitHub](https://github.com/aiola-lab)
+- [Status](https://status.aiola.ai/)
+
+## API Evangelist rating
+
+**Kin Score 30.3** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| `authentication/` | The API-key-to-JWT exchange, session lifecycle, and the docs/SDK disagreement over the default host |
-| `conformance/` | Eighteen standards assertions, each with the evidence that establishes it |
-| `conventions/` | Transport, streaming events, payload limits, idempotency (none) and reversibility (n/a) |
-| `errors/` | The error-code catalog assembled from the auth guide and the SDK error taxonomy |
-| `lifecycle/` | Status page components, model generations, and the host-liveness findings |
-| `llms/` | aiOla's own `llms.txt`, saved verbatim |
-| `mcp/` | The probed MCP server manifest and its verbatim `tools/list` response |
-| `packages/` | Six first-party SDKs with registry versions and publish dates |
-| `plans/`, `rate-limits/` | Honest zeros — aiOla publishes neither pricing nor limits |
-| `security/` | Domain security probe, Trust Center certifications, and the absent disclosure program |
-| `well-known/` | The `/.well-known/` probe across all six hosts |
+| Discoverability | 80.0 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 18.4 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 28.9 |
+
+**Agent readiness 14.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
+
+**Regulatory alignment 22.7** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aiola/](https://apis.io/providers/aiola/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for aiOla: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aiola/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
